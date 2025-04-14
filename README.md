@@ -1,5 +1,14 @@
-Final Project for EECS 398 - Practical Data Science
-Data Analysis of Recipes and Ratings Dataset
+# Data Analysis of Recipes and Ratings Dataset
+
+## Introduction
+
+## Data Cleaning and Exploratory Data Analysis
+
+## Framing a Prediction Problem
+
+## Baseline Model
+
+## Final Model
 
 Includes Preprocessing of Data along with Unvariate and Bivariate Visualizations
 
