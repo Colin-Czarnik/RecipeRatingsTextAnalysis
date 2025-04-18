@@ -24,6 +24,13 @@ In the table below, we describe the features in our dataset that will be importa
 
 ## Data Cleaning and Exploratory Data Analysis
 
+Our first task with this dataset is to clean the the data, this includes converting strings into numerical features and properly handling null values. One important thing is the value of rating. With some digging, we found that reviews of 0 are actually people who did not leave a rating on the recipe, leaving only a review. A good indicator of this is user 452045 reviewing recipe id 433334: "I'm not rating this because I have not made it but I am suggesting that ... references to adding 12 cups of flour!" As can be seen at the start of the text of the review, this user indicated that they were not leaving a rating, yet the rating was listed as a 0. This justifies changing all ratings of 0 to NA, as they shouldn't be included as a bad review when they're really neutral.
+
+Another feature we had to clean is nutrition. We want to use the nutritional information as separate features in our model, but they are initially stored in a string that takes the form of a list. The first step is to use Regular Expressions to convert this string into a list of floats. Each value in this list corresponds to a nutrition information value (either # of calories, or %DV of others). The next step is to make each element of this list into its own column, allowing us to use each of them as individual features. 
+(will add more on tratment of tags and how we handled imputation)
+
+
+
 ## Framing a Prediction Problem
 
 Building off our exploratory analysis, our goal is to predict the **average rating** (avg_rating) of a recipe based on various features such as tags attributed to the recipe, preparation time, nutritional information, and user reviews. This is a regression problem, as the target variable, avg_rating, is continuous. We chose avg_rating as the response variable because it reflects how well a recipe is received by users. In contrast, individual **rating** values can vary greatly from user to user. Aggregating these ratings into an average allows us to capture a more holistic understanding of how well a recipe stands out. Understanding the factors that influence this rating can offer valuable insights into what makes a recipe successful, helping future recommendations and recipe development.
