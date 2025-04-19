@@ -60,3 +60,41 @@ Specifically, our baseline model is quite poor at predicting recipes that have a
 When we build our final model, our primary goal is to minimize the test MSE of recipes with average ratings of 4 stars or less as much as possible, while still maintaining good predictions for recipes with higher average ratings.
  
 ## Final Model
+
+For our final model, we added 3 new features in addition to the **calories (#)** and **minutes** included in the baseline model:
+1. Ratio of Saturated Fat (PDV) to Total Fat (PDV) -
+2. TF IDF Vectorizer of **Tags** -
+3. TF IDF Vectorizer of **Reviews** -
+
+The modeling algorithm we chose for our final model was **Lasso Regression** since from our two TF IDF Vectorizer Transformations of the "Tags" and "Reviews", we would gain a lot of new features for each individual unique tag as well as for each individual unique token in the entire corpus of reviews in the dataset. Performing this kind of regression algorithm helps the model to select which features are the most important in making predictions for a recipe's average rating and to prevent the model from getting too complex from the large quantity of columns added to our feature matrix.
+
+The hyperparameters we chose to tune in the cross validation Grid Search performed on this final model were:
+1. Lasso Alpha - 
+2. Max Features for TFIDF Vectorizer of Reviews -
+
+The plot below shows the overall train and test performance of the final model in terms of Mean Squared Error compared to the baseline model:
+
+<iframe
+src="assets/baseline_vs_final_all_mse_performance.html"
+width="800"
+height="600"
+frameborder="0"
+></iframe>
+
+The plot below shows how the final model performed in predicting recipes with high and low average ratings in comparison to the baseline model:
+
+<iframe
+src="assets/baseline_vs_final_grouped_mse_performance.html"
+width="800"
+height="600"
+frameborder="0"
+></iframe>
+
+Lastly, the figure below details a surface plot showing the Average Mean Squared Error on the Validation Set during Cross Validation across different settings of the hyperparameters tuned:
+
+<iframe
+src="assets/final_model_val_mse_surface_plot.html"
+width="800"
+height="600"
+frameborder="0"
+></iframe>
