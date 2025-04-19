@@ -73,7 +73,6 @@ The hyperparameters we chose to tune in the cross validation Grid Search perform
 2. Max Features for TFIDF Vectorizer of Reviews -
 
 The plot below shows the overall train and test performance of the final model in terms of Mean Squared Error compared to the baseline model:
-
 <iframe
 src="assets/baseline_vs_final_all_mse_performance.html"
 width="800"
@@ -81,8 +80,9 @@ height="600"
 frameborder="0"
 ></iframe>
 
-The plot below shows how the final model performed in predicting recipes with high and low average ratings in comparison to the baseline model:
+We can see that overall the final model performed much better on both the training and test data with neither of the model's showing obvious signs of overfitting to the training data. However, this plot does not give the whole story, since in our baseline model we saw that it only performed well on recipes that already had high average ratings (greater than 4 stars) which represents the majority of the recipes in the dataset. So we also want to evaluate how the final model did on recipes with less flattering average ratings to see how the additional features helped in distinguishing good from bad recipes.
 
+The plot below shows how the final model performed in predicting recipes with high and low average ratings in comparison to the baseline model:
 <iframe
 src="assets/baseline_vs_final_grouped_mse_performance.html"
 width="800"
@@ -90,11 +90,16 @@ height="600"
 frameborder="0"
 ></iframe>
 
-Lastly, the figure below details a surface plot showing the Average Mean Squared Error on the Validation Set during Cross Validation across different settings of the hyperparameters tuned:
+While the final model's MSE in both the train and test data for recipes with lower average ratings were still noticably higher than the MSE for recipes with higher average ratings, the final model's MSE for recipes with lower average ratings is much lower than the baseline model's MSE for recipes with lower average ratings. In fact we see over a **50% reduction** in both the train and test MSE of the final model in recipes with lower average ratings. This is great to see because it validates these features as being helpful to predict average ratings of a recipe, as we are able to help resolve the issue introduced from our baseline model.
 
+Lastly, the figure below details a surface plot showing the Average Mean Squared Error on the Validation Set during Cross Validation across different settings of the hyperparameters tuned:
 <iframe
 src="assets/final_model_val_mse_surface_plot.html"
 width="800"
 height="600"
 frameborder="0"
 ></iframe>
+
+We can see that after a certain threshold, the Validation MSE plummets for the final model when we decrease our alpha for our Lasso Regression pipeline, with the number of max features of the TF IDF Vectorizer for "Reviews" not making as much of a significant contribution in the performance of the final baseline. This signals that regularization strength has a much greater impact on model performance than the size of the TF-IDF vocabulary. In other words, once enough informative review terms are included in the model, further increasing the number of features yields diminishing returns. 
+Notably, the best-performing model used the smallest alpha value (10^-5^), implying that very minimal regularization yielded the lowest average validation error. This suggests that our final model actually benefits from retaining more and more of the original feature weights, and that the data (particuarly the textual reviews) contains enough valuable information to justify a more flexible and complex model.
+In summary, while increasing the number of review features helps up to a certain extent, allowing the model more freedom to leverage these features with a smaller regaularization penalty leads to the greatest performance gains.
