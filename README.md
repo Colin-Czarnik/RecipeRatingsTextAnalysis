@@ -43,4 +43,20 @@ By aggregating reviews and using the final average rating as the response variab
 
 ## Baseline Model
 
+Our baseline model is a simple **linear regression** pipeline that uses the **calories (#)** and **minutes** of a recipe to predict its **average rating (avg_rating)**, with log tranformations on both of the features to account for magnitudes of calories and minutes for certain recipes (e.g. vanilla extract which takes about half a year).
+
+In this model, there are **2** quantitative features, **0** ordinal features, and **0** nominal features. In addition, since the two features used in the baseline model are already numerical, no additional encoding is necessary.
+
+Below are the results detailing the Mean Squared Error (MSE) of the baseline model for the training and test sets:
+<iframe
+src="assets/baseline_model_mse_performance.html"
+width="800"
+height="600"
+frameborder="0"
+></iframe>
+
+Based on our MSE plot, we can see that the *overall* performance of the baseline model is decent with a test MSE of 0.4118 considering the **avg_rating** feature ranges from 1 to 5. However, when we split its MSE to average ratings above 4 stars and below or equal to 4 stars, we reveal some interesting behavior.
+Specifically, our baseline model is quite poor at predicting recipes that have an average rating of 4 stars or less. This is important to note since in our Exploratory Data Analysis, we found through our univariate plot that the distribution of ratings in the dataset was left skewed, meaning that the majority of ratings were 4 stars or higher, causing a sort of imbalance when predicting recipes with high ratings versus lower ratings.
+When we build our final model, our primary goal is to minimize the test MSE of recipes with average ratings of 4 stars or less as much as possible, while still maintaining good predictions for recipes with higher average ratings.
+ 
 ## Final Model
