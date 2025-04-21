@@ -26,8 +26,32 @@ In the table below, we describe the features in our dataset that will be importa
 
 Our first task with this dataset is to clean the the data, this includes converting strings into numerical features and properly handling null values. One important thing is the value of rating. With some digging, we found that reviews of 0 are actually people who did not leave a rating on the recipe, leaving only a review. A good indicator of this is user 452045 reviewing recipe id 433334: "I'm not rating this because I have not made it but I am suggesting that ... references to adding 12 cups of flour!" As can be seen at the start of the text of the review, this user indicated that they were not leaving a rating, yet the rating was listed as a 0. This justifies changing all ratings of 0 to NA, as they shouldn't be included as a bad review when they're really neutral.
 
-Another feature we had to clean is nutrition. We want to use the nutritional information as separate features in our model, but they are initially stored in a string that takes the form of a list. The first step is to use Regular Expressions to convert this string into a list of floats. Each value in this list corresponds to a nutrition information value (either # of calories, or %DV of others). The next step is to make each element of this list into its own column, allowing us to use each of them as individual features. 
-(will add more on tratment of tags and how we handled imputation)
+Another feature we had to clean is nutrition. We want to use the nutritional information as separate features in our model, but they are initially stored in a string that takes the form of a list. The first step is to use Regular Expressions to convert this string into a list of floats. Each value in this list corresponds to a nutrition information value (either # of calories, or %DV of others). The next step is to make each element of this list into its own column, allowing us to use each of them as individual features. We are going to do text analysis on the tags, column, so we convert the string that looks like a list into a string of the tags separated by a space. This will be easier to work with later when performing text analysis.
+
+For missing values, there was luckily very little to worry about in our dataset. The only NA values in our dataset in the columns we are working with are in the Average Rating column that we just set. Since we are focusing on predicting the ratings based on the features of the recipes for the most part, we felt it was fair to remove these NA values from our dataset, as these people specifically did not leave a rating for a reason. We feel that any form of imputation here would be adding unnecessary noise to our data. The recipes with NA for Average Rating only make up about 3% of our dataset. There was also exactly 1 missing value in the Minutes column, and with it being such a minor difference, we felt safe in removing that recipe too.
+
+For our initial Exploritory Data Analysis, we looked at the distribution of the Average Rating column, as it is the column we will be predicting here. We found that the ratings were heavily skewed towards higher values, with over 60% of the recipes having average ratings higher than 4.75, and over 90% of recipes having average ratings of 4 or higher. This impacts how we will handle our model evaluation, as we want our model to perform well on all ratings, not just the higher ones. The histogram of the Average Rating column can be seen below.
+<iframe
+src="assets/rate_hist.html"
+width="800"
+height="600"
+frameborder="0"
+></iframe>
+
+We also performed bivariate analysis on Average ratings based on two factors that we will be working with in our baseline model, minutes and calories. Shown below are two plots that show the comparison of calories and minutes to average ratings, with side-by-side box plots based on the quantiles of the values. A point showing the mean value is also displayed.
+<iframe
+src="assets/cal_box.html"
+width="800"
+height="600"
+frameborder="0"
+></iframe>
+
+<iframe
+src="assets/min_box.html"
+width="800"
+height="600"
+frameborder="0"
+></iframe>
 
 
 
