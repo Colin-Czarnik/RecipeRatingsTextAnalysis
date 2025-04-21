@@ -45,15 +45,12 @@ width="800"
 height="600"
 frameborder="0"
 ></iframe>
-
 <iframe
 src="assets/min_box.html"
 width="800"
 height="600"
 frameborder="0"
 ></iframe>
-
-
 
 ## Framing a Prediction Problem
 
