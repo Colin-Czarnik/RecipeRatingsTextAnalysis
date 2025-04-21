@@ -40,17 +40,19 @@ frameborder="0"
 
 We also performed bivariate analysis on Average ratings based on two factors that we will be working with in our baseline model, minutes and calories. Shown below are two plots that show the comparison of calories and minutes to average ratings, with side-by-side box plots based on the quantiles of the values. A point showing the mean value is also displayed.
 <iframe
-src="assets/cal_box.html"
+src="assets/fat_box.html"
 width="800"
 height="600"
 frameborder="0"
 ></iframe>
-<iframe
-src="assets/min_box.html"
-width="800"
-height="600"
-frameborder="0"
-></iframe>
+Shown below is a pivot table showing the average ratings based on the quantiles of the data.
+| cal_bins	\ min_bins |	(0.999, 16.0] |	(16.0, 30.0]	| (30.0, 45.0] |	(45.0, 75.0] |	(75.0, 1051200.0]	|		
+| (-0.001, 146.5] |	4.69 |	4.61 |	4.57 |	4.63 |	4.62 |
+| (146.5, 248.9] |	4.68 |	4.63 |	4.61	| 4.62 |	4.61 |
+| (248.9, 370.6]	| 4.65	| 4.63	| 4.60	| 4.61	| 4.58 |
+| (370.6, 563.3]	| 4.66 |	4.63 |	4.61 |	4.61 |	4.60 |
+| (563.3, 45609.0]	| 4.63 |	4.62 |	4.64 |	4.61 |	4.62 |
+
 
 ## Framing a Prediction Problem
 
