@@ -22,6 +22,7 @@ In the table below, we describe the features in our dataset that will be importa
 | review | Free-text review of the recipe left by a user |
 | rating | A user-submitted score (0–5 stars) reflecting their evaluation of the recipe's quality |
 
+
 ## Data Cleaning and Exploratory Data Analysis
 
 Our first task with this dataset is to clean the the data, this includes converting strings into numerical features and properly handling null values. One important thing is the value of rating. With some digging, we found that reviews of 0 are actually people who did not leave a rating on the recipe, leaving only a review. A good indicator of this is user 452045 reviewing recipe id 433334: "I'm not rating this because I have not made it but I am suggesting that ... references to adding 12 cups of flour!" As can be seen at the start of the text of the review, this user indicated that they were not leaving a rating, yet the rating was listed as a 0. This justifies changing all ratings of 0 to NA, as they shouldn't be included as a bad review when they're really neutral.
@@ -33,20 +34,20 @@ For missing values, there was luckily very little to worry about in our dataset.
 For our initial Exploritory Data Analysis, we looked at the distribution of the Average Rating column, as it is the column we will be predicting here. We found that the ratings were heavily skewed towards higher values, with over 60% of the recipes having average ratings higher than 4.75, and over 90% of recipes having average ratings of 4 or higher. This impacts how we will handle our model evaluation, as we want our model to perform well on all ratings, not just the higher ones. The histogram of the Average Rating column can be seen below.
 <iframe
 src="assets/rate_hist.html"
-width="800"
-height="600"
+width="600"
+height="400"
 frameborder="0"
 ></iframe>
 
-We also performed bivariate analysis on Average ratings based on two factors that we will be working with in our baseline model, minutes and calories. Shown below are two plots that show the comparison of calories and minutes to average ratings, with side-by-side box plots based on the quantiles of the values. A point showing the mean value is also displayed.
+We also performed bivariate analysis on Average ratings based on a factor we will be working with in our final model. Saturated Fat is percieved to be an unhealthy kind of fat. By Scaling the amount of saturated fat to the amount of total fat, we might be able to help our prediction power on how the recipe will be rated. Shown below is a plot depicting side-by-side box plots of the distributions of average ratings of recipes, with the bins being the quantiles of the ratio of saturated fat to total fat. Note that since the units for each of these values are in Percent Daily Value, the value of saturated fat can be higher than total fat, making the ratio greater than 1. The trend on the mean line seems to be slightly negative, with higher values of the fat ratio corresponding to lower average ratings.
 <iframe
 src="assets/fat_box.html"
-width="800"
-height="600"
+width="600"
+height="400"
 frameborder="0"
 ></iframe>
 
-Shown below is a pivot table showing the average ratings based on the quantiles of the data. Note that lower values of 
+Shown below is a pivot table showing the average of the average rating column based on the quantiles of the calories and minutes columns. Note that higher values ted to correspond with lower values of minutes and calories.
 
 | Minutes (right) Calories (down) |   (0.999, 16.0] |   (16.0, 30.0] |   (30.0, 45.0] |   (45.0, 75.0] |   (75.0, 1051200.0] |
 |:-----------------|----------------:|---------------:|---------------:|---------------:|--------------------:|
@@ -55,7 +56,6 @@ Shown below is a pivot table showing the average ratings based on the quantiles 
 | (248.9, 370.6]   |         4.655 |        4.628 |        4.596 |        4.609 |             4.584 |
 | (370.6, 563.3]   |         4.660 |        4.633 |        4.612 |        4.610 |             4.600 |
 | (563.3, 45609.0] |         4.630 |        4.621 |        4.637 |        4.613 |             4.623 |
-
 
 
 ## Framing a Prediction Problem
@@ -67,6 +67,7 @@ To evaluate our model, we use Mean Squared Error (MSE). Since our target is cont
 In our modeling approach, we aggregate all available reviews for each recipe into a single, combined text input. This means that our model has access to the collective feedback from users across the entire lifespan of a recipe — not just reviews submitted shortly after its publication. As a result, the features we use at prediction time, including the combined review text, reflect the long-term perception and reception of the recipe. While this would not be appropriate for a real-time prediction system (e.g., predicting success before any reviews exist), it aligns well with our project’s objective: to understand the overall factors that contribute to a recipe’s long-term success. Thus, the features that we will have access to by the time of prediction are the following: tags, minutes, calories (#), total fat (PDV), saturated fat (PDV), review. Note that these are all of the features we use for the final model.
 
 By aggregating reviews and using the final average rating as the response variable, we aim to build a model that captures the full story of each recipe — a comprehensive reflection of how it is received by users over time.
+
 
 ## Baseline Model
 
@@ -85,6 +86,7 @@ frameborder="0"
 Based on our MSE plot, we can see that the *overall* performance of the baseline model is decent with a test MSE of 0.4118 considering the **avg_rating** feature ranges from 1 to 5. However, when we split its MSE to average ratings above 4 stars and below or equal to 4 stars, we reveal some interesting behavior.
 Specifically, our baseline model is quite poor at predicting recipes that have an average rating of 4 stars or less. This is important to note since in our Exploratory Data Analysis, we found through our univariate plot that the distribution of ratings in the dataset was left skewed, meaning that the majority of ratings were 4 stars or higher, causing a sort of imbalance when predicting recipes with high ratings versus lower ratings.
 When we build our final model, our primary goal is to minimize the test MSE of recipes with average ratings of 4 stars or less as much as possible, while still maintaining good predictions for recipes with higher average ratings.
+
  
 ## Final Model
 
