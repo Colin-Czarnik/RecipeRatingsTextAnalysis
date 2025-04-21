@@ -35,7 +35,7 @@ For our initial Exploritory Data Analysis, we looked at the distribution of the 
 <iframe
 src="assets/rate_hist.html"
 width="700"
-height="500"
+height="450"
 frameborder="0"
 ></iframe>
 
@@ -43,7 +43,7 @@ We also performed bivariate analysis on Average ratings based on a factor we wil
 <iframe
 src="assets/fat_box.html"
 width="700"
-height="500"
+height="450"
 frameborder="0"
 ></iframe>
 
