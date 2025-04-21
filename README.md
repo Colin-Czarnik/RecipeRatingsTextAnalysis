@@ -83,7 +83,7 @@ height="525"
 frameborder="0"
 ></iframe>
 
-Based on our MSE plot, we can see that the *overall* performance of the baseline model is decent with a test MSE of 0.4118 considering the **avg_rating** feature ranges from 1 to 5. However, when we split its MSE to average ratings above 4 stars and below or equal to 4 stars, we reveal some interesting behavior.
+Based on our MSE plot, we can see that the *overall* performance of the baseline model is decent with a test MSE of 0.4153 considering the **avg_rating** feature ranges from 1 to 5. However, when we split its MSE to average ratings above 4 stars and below or equal to 4 stars, we reveal some interesting behavior.
 Specifically, our baseline model is quite poor at predicting recipes that have an average rating of 4 stars or less. This is important to note since in our Exploratory Data Analysis, we found through our univariate plot that the distribution of ratings in the dataset was left skewed, meaning that the majority of ratings were 4 stars or higher, causing a sort of imbalance when predicting recipes with high ratings versus lower ratings.
 When we build our final model, our primary goal is to minimize the test MSE of recipes with average ratings of 4 stars or less as much as possible, while still maintaining good predictions for recipes with higher average ratings.
 
@@ -132,5 +132,5 @@ frameborder="0"
 ></iframe>
 
 We can see that after a certain threshold, the Validation MSE plummets for the final model when we decrease our alpha for our Lasso Regression pipeline, with the number of max features of the TF-IDF Vectorizer for "Reviews" not making as much of a significant contribution in the performance of the final baseline. This signals that regularization strength has a much greater impact on model performance than the size of the TF-IDF vocabulary. In other words, once enough informative review terms are included in the model, further increasing the number of features yields diminishing returns. 
-Notably, the best-performing model used the smallest alpha value (10^-5^), implying that very minimal regularization yielded the lowest average validation error. This suggests that our final model actually benefits from retaining more and more of the original feature weights, and that the data (particuarly the textual reviews) contains enough valuable information to justify a more flexible and complex model.
+Notably, the best-performing model used a very small alpha value (10^-5^), implying that very minimal regularization yielded the lowest average validation error. This suggests that our final model actually benefits from retaining more and more of the original feature weights, and that the data (particuarly the textual reviews) contains enough valuable information to justify a more flexible and complex model.
 In summary, while increasing the number of review features helps up to a certain extent, allowing the model more freedom to leverage these features with a smaller regaularization penalty leads to the greatest performance gains.
