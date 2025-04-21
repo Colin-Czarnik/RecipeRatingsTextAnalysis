@@ -34,16 +34,16 @@ For missing values, there was luckily very little to worry about in our dataset.
 For our initial Exploritory Data Analysis, we looked at the distribution of the Average Rating column, as it is the column we will be predicting here. We found that the ratings were heavily skewed towards higher values, with over 60% of the recipes having average ratings higher than 4.75, and over 90% of recipes having average ratings of 4 or higher. This impacts how we will handle our model evaluation, as we want our model to perform well on all ratings, not just the higher ones. The histogram of the Average Rating column can be seen below.
 <iframe
 src="assets/rate_hist.html"
-width="600"
-height="400"
+width="700"
+height="500"
 frameborder="0"
 ></iframe>
 
 We also performed bivariate analysis on Average ratings based on a factor we will be working with in our final model. Saturated Fat is percieved to be an unhealthy kind of fat. By Scaling the amount of saturated fat to the amount of total fat, we might be able to help our prediction power on how the recipe will be rated. Shown below is a plot depicting side-by-side box plots of the distributions of average ratings of recipes, with the bins being the quantiles of the ratio of saturated fat to total fat. Note that since the units for each of these values are in Percent Daily Value, the value of saturated fat can be higher than total fat, making the ratio greater than 1. The trend on the mean line seems to be slightly negative, with higher values of the fat ratio corresponding to lower average ratings.
 <iframe
 src="assets/fat_box.html"
-width="600"
-height="400"
+width="700"
+height="500"
 frameborder="0"
 ></iframe>
 
