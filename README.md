@@ -79,7 +79,7 @@ Below are the results detailing the Mean Squared Error (MSE) of the baseline mod
 <iframe
 src="assets/baseline_model_mse_performance.html"
 width="800"
-height="500"
+height="525"
 frameborder="0"
 ></iframe>
 
@@ -117,7 +117,7 @@ The plot below shows how the final model performed in predicting recipes with hi
 <iframe
 src="assets/baseline_vs_final_grouped_mse_performance.html"
 width="800"
-height="500"
+height="525"
 frameborder="0"
 ></iframe>
 
@@ -127,7 +127,7 @@ Lastly, the figure below details a surface plot showing the Average Mean Squared
 <iframe
 src="assets/final_model_val_mse_surface_plot.html"
 width="800"
-height="450"
+height="425"
 frameborder="0"
 ></iframe>
 
