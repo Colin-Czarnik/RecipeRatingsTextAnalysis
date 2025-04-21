@@ -6,7 +6,7 @@ Whether you are a michelin-star chef who works for *Hell's Kitchen*, or a humble
 
 The data includes both details on the recipe itself, such as the ingredients, nutritional information, and the steps in the recipe; as well as the details on a user's interaction with the recipe including their rating of the recipe, the date in which they submitted their review, and the review itself. With this information, we aim to predict a recipe's average rating based on these features to better understand what makes recipes successful, hoping to provide insight on how recipes can be improved or better tailored ot individual preferences. The end goal of this analysis is to use our predictive models to support smarter food recommendation systems and to offer a data-driven perspective on what makes a recipe truly stand out.
 
-In the table below, we describe the features in our dataset that will be important for our data analysis and model building. This dataset describes two merged datasets that describe the recipe metadata and the user interactions, containing 1,132,367 rows along with the following relevant columns with their corrresponding descriptions.
+In the table below, we describe the features in our dataset that will be important for our data analysis and model building. This dataset describes two merged datasets that describe the recipe metadata and the user interactions, containing 83,781 rows along with the following relevant columns with their corrresponding descriptions.
 
 | Feature Name | Description |
 | ----------- | ----------- |
@@ -14,13 +14,9 @@ In the table below, we describe the features in our dataset that will be importa
 | minutes | Minutes to prepare recipe |
 | calories (#) | Total number of calories in recipe |
 | total fat (PDV) | Percent daily value (%DV) of total fat per serving |
-| sugar (PDV) | Percent daily value (%DV) of sugar per serving |
-| sodium (PDV) | Percent daily value (%DV) of sodium per serving |
-| protein (PDV) | Percent daily value (%DV) of protein per serving |
 | saturated fat (PDV) | Percent daily value (%DV) of saturated fat per serving |
-| carbohydrates (PDV) | Percent daily value (%DV) of carbohydrates per serving  |
 | review | Free-text review of the recipe left by a user |
-| rating | A user-submitted score (0–5 stars) reflecting their evaluation of the recipe's quality |
+| avg_rating | The average user-submitted score (from 0 to 5 stars) indicating how users rate the overall quality of the recipe |
 
 
 ## Data Cleaning and Exploratory Data Analysis
